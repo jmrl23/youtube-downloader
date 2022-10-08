@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply focus:outline-none;
+  }
+
+  body {
+    @apply font-poppins text-slate-900 overflow-x-hidden;
+  }
+
+  a, button {
+    @apply cursor-default md:cursor-pointer;
+  }
+
+  h1, h2, h3, h4, h6, h6, p {
+    @apply cursor-default;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-screen-lg mx-auto px-4 xl:px-0;
+  }
+}
