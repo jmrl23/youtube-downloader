@@ -4,11 +4,12 @@ import fastifyProxy from '@fastify/http-proxy';
 import fastifyStatic from '@fastify/static';
 
 const server = fastify();
-const host = process.env.HOST ?? 'localhost';
+const backendUrl = process.env.BACKEND_URL ?? 'http://localhost:3001';
+const host = process.env.SERVER_HOST ?? 'localhost'; // 0.0.0.0
 const port = parseInt(process.env.PORT ?? '3000');
 
 server.register(fastifyProxy, {
-  upstream: process.env.API_URL ?? 'http://localhost:3001',
+  upstream: backendUrl,
   prefix: '/api',
 });
 
@@ -17,5 +18,6 @@ server.register(fastifyStatic, {
 });
 
 server.listen({ host, port }, function () {
+  console.clear();
   console.log('Server is running on port', port);
 });
