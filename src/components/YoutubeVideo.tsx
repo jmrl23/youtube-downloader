@@ -25,7 +25,11 @@ export default function YoutubeVideo({ youtubeVideo }: Props) {
       const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error(`Failed to download ${title} as ${format}`);
+        const error = await response.json();
+
+        if ('error' in error) throw new Error(error.message);
+
+        throw new Error('An error occurs');
       }
 
       const blob = await response.blob();
