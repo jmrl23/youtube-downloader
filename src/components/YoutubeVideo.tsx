@@ -3,22 +3,48 @@ import { Img } from 'react-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MusicIcon, PauseIcon, PlayIcon, VideoIcon } from 'lucide-react';
-import { useToast } from './ui/use-toast';
-import sanitize from 'sanitize-filename';
+import { useToast } from '@/components/ui/use-toast';
+import { saveFile } from '@/lib/utils';
 import YoutubeIframe from '@/components/YoutubeIframe';
+import sanitize from 'sanitize-filename';
 
 export default function YoutubeVideo({ youtubeVideo }: Props) {
   const { thumbnail, title, duration, author } = youtubeVideo;
   const [isPreview, setIsPreview] = useState<boolean>(false);
   const { toast } = useToast();
-  const notifyDownload = (title: string, format: string) => {
+  const beginDownload = async (url: string, title: string, format: string) => {
     toast({
-      title: 'Preparing your download',
-      description: `Download for "${title.slice(
+      title: 'Download',
+      description: `Your ${format.toUpperCase()} download of "${title.substring(
         0,
-        10,
-      )}..." as ${format} will begin shortly, kindly wait.`,
+        16,
+      )}..." is underway in the background. File will be saved automatically once it's done.`,
     });
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Failed to download ${title} as ${format}`);
+      }
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const filename = sanitize(`${title}.${format.toLowerCase()}`);
+
+      saveFile(blobUrl, filename);
+
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      const description =
+        error instanceof Error ? error.message : 'An error occurs';
+
+      toast({
+        title: 'Download failed',
+        description,
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -59,36 +85,38 @@ export default function YoutubeVideo({ youtubeVideo }: Props) {
             {isPreview ? <PauseIcon /> : <PlayIcon />}
             <span className='ml-2'>Preview</span>
           </Button>
-          <a
-            href={`/api/download/${youtubeVideo.videoId}?format=mp4`}
-            target='_blank'
-            download={sanitize(`${youtubeVideo.title}.mp4`)}
+
+          <Button
+            variant={'secondary'}
+            type='button'
+            title='Download MP4'
+            className='rounded-full rounded-r-none border-r pl-6'
+            onClick={() =>
+              beginDownload(
+                `/api/download/${youtubeVideo.videoId}?format=mp4`,
+                youtubeVideo.title,
+                'MP4',
+              )
+            }
           >
-            <Button
-              variant={'secondary'}
-              type='button'
-              title='Download MP4'
-              className='rounded-full rounded-r-none border-r pl-6'
-              onClick={() => notifyDownload(youtubeVideo.title, 'MP4')}
-            >
-              <VideoIcon />
-            </Button>
-          </a>
-          <a
-            href={`/api/download/${youtubeVideo.videoId}?format=mp3`}
-            target='_blank'
-            download={sanitize(`${youtubeVideo.title}.mp3`)}
+            <VideoIcon />
+          </Button>
+
+          <Button
+            variant={'secondary'}
+            type='button'
+            title='Download MP3'
+            className='rounded-full rounded-l-none border-l pr-6'
+            onClick={() =>
+              beginDownload(
+                `/api/download/${youtubeVideo.videoId}?format=mp3`,
+                youtubeVideo.title,
+                'MP3',
+              )
+            }
           >
-            <Button
-              variant={'secondary'}
-              type='button'
-              title='Download MP3'
-              className='rounded-full rounded-l-none border-l pr-6'
-              onClick={() => notifyDownload(youtubeVideo.title, 'MP3')}
-            >
-              <MusicIcon />
-            </Button>
-          </a>
+            <MusicIcon />
+          </Button>
         </div>
       </div>
     </div>

@@ -20,3 +20,12 @@ export async function request<T>(
     return new Error('An error occurs');
   }
 }
+
+export function saveFile(url: string, filename: string): void {
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
