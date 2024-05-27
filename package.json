@@ -1,16 +1,19 @@
 {
   "name": "youtube-downloader",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "author": "Jomariel Gaitera <gaiterajomariel@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --project tsconfig.json && vite build && tsc --project server/tsconfig.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server/main.js"
   },
   "dependencies": {
+    "@fastify/http-proxy": "^9.5.0",
+    "@fastify/static": "^7.0.4",
     "@hookform/resolvers": "^3.4.2",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-separator": "^1.0.3",
@@ -20,6 +23,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "fastify": "^4.27.0",
     "lucide-react": "^0.379.0",
     "qs": "^6.12.1",
     "react": "^18.2.0",

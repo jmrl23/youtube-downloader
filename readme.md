@@ -16,8 +16,9 @@ yarn # or npm install
 
 ## Commands
 
-| Command          | Description                                    |
-| ---------------- | ---------------------------------------------- |
-| yarn run build   | build                                          |
-| yarn run preview | start in preview mode (should run build first) |
-| yarn run dev     | start in development mode (with swc)           |
+| Command          | Description                                 |
+| ---------------- | ------------------------------------------- |
+| yarn run build   | build                                       |
+| yarn run preview | start in preview mode (must build first)    |
+| yarn run dev     | start in development mode (with swc)        |
+| yarn run start   | start in production mode (must build first) |
