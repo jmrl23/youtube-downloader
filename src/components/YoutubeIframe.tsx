@@ -3,7 +3,7 @@ import { IframeHTMLAttributes } from 'react';
 export default function YoutubeIframe({ youtubeVideo, ...props }: Props) {
   return (
     <iframe
-      src={`http://www.youtube.com/embed/${youtubeVideo.videoId}?enablejsapi=1`}
+      src={`https://www.youtube.com/embed/${youtubeVideo.videoId}?enablejsapi=1`}
       {...props}
     ></iframe>
   );
