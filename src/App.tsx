@@ -1,15 +1,17 @@
-import { Button } from '@/components/ui/button';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import Header from '@/components/Header';
+import Main from '@/components/Main';
+
+const queryClient = new QueryClient();
 
 export default function App() {
-  const [count, setCount] = useState<number>(0);
-  const handleClick = () => setCount((count) => count + 1);
+  const [youtubeVideos, setYoutubeVideos] = useState<YoutubeVideo[]>([]);
 
   return (
-    <div className='p-4 w-full h-screen grid place-items-center'>
-      <Button type='button' variant={'outline'} onClick={handleClick}>
-        Clicked: {count} times
-      </Button>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Header setYoutubeVideos={setYoutubeVideos} />
+      <Main youtubeVideos={youtubeVideos} />
+    </QueryClientProvider>
   );
 }
