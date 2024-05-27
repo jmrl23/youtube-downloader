@@ -51,6 +51,7 @@ export default function Search({ setYoutubeVideos }: Props) {
     }
 
     setYoutubeVideos(data.videos);
+    setIsFocused(false);
   };
 
   return (
@@ -87,7 +88,7 @@ export default function Search({ setYoutubeVideos }: Props) {
           )}
         />
         {isFocused && suggestions.length > 0 && (
-          <div className='bg-white fixed mt-2 rounded-sm shadow p-4 w-[calc(100%-2rem)] md:w-[300px] lg:w-[400px] flex flex-col space-y-2'>
+          <div className='bg-white fixed mt-2 rounded-sm shadow p-4 w-[calc(100%-2rem)] md:w-[300px] lg:w-[400px] flex flex-col space-y-2 z-50'>
             {suggestions.map((suggestion) => (
               <p
                 key={suggestion}

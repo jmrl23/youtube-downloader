@@ -1,9 +1,5 @@
 import Search from '@/components/form/Search';
 
-export interface Props {
-  setYoutubeVideos: (youtubeVideos: YoutubeVideo[]) => void;
-}
-
 export default function Header({ setYoutubeVideos }: Props) {
   return (
     <header className='bg-slate-700 p-4'>
@@ -15,4 +11,8 @@ export default function Header({ setYoutubeVideos }: Props) {
       </div>
     </header>
   );
+}
+
+export interface Props {
+  setYoutubeVideos: (youtubeVideos: YoutubeVideo[]) => void;
 }
