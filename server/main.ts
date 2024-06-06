@@ -5,7 +5,7 @@ import fastifyStatic from '@fastify/static';
 
 const server = fastify();
 const backendUrl = process.env.BACKEND_URL ?? 'http://localhost:3001';
-const host = process.env.SERVER_HOST ?? 'localhost'; // 0.0.0.0
+const host = process.env.SERVER_HOST ?? '0.0.0.0';
 const port = parseInt(process.env.PORT ?? '3000');
 
 server.register(fastifyProxy, {
