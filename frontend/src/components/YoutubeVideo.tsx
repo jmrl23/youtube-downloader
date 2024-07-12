@@ -97,7 +97,7 @@ export default function YoutubeVideo({ youtubeVideo }: Props) {
             className='rounded-full rounded-r-none border-r pl-6'
             onClick={() =>
               beginDownload(
-                `/api/download/${youtubeVideo.videoId}?format=mp4`,
+                `/api/youtube/${youtubeVideo.videoId}/download?format=mp4`,
                 youtubeVideo.title,
                 'MP4',
               )
@@ -113,7 +113,7 @@ export default function YoutubeVideo({ youtubeVideo }: Props) {
             className='rounded-full rounded-l-none border-l pr-6'
             onClick={() =>
               beginDownload(
-                `/api/download/${youtubeVideo.videoId}?format=mp3`,
+                `/api/youtube/${youtubeVideo.videoId}/download?format=mp3`,
                 youtubeVideo.title,
                 'MP3',
               )

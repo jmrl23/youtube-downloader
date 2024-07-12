@@ -34,7 +34,7 @@ export default function Search({ setYoutubeVideos }: Props) {
   const onSubmit = async ({ q }: z.infer<typeof formSchema>) => {
     const data = await request<{ videos: YoutubeVideo[] }>(
       fetch(
-        `/api/videos?${qs.stringify({
+        `/api/youtube/videos?${qs.stringify({
           q,
         })}`,
       ),
