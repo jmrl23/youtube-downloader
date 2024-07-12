@@ -1,4 +1,4 @@
-import { IframeHTMLAttributes } from 'react';
+import type { IframeHTMLAttributes } from 'react';
 
 export default function YoutubeIframe({ youtubeVideo, ...props }: Props) {
   return (

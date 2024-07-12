@@ -1,5 +1,5 @@
 export declare global {
-  declare interface YoutubeVideo {
+  interface YoutubeVideo {
     type: string;
     videoId: string;
     url: string;

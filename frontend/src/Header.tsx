@@ -1,4 +1,4 @@
-import Search from '@/components/form/Search';
+import SearchForm from './SearchForm';
 
 export default function Header({ setYoutubeVideos }: Props) {
   return (
@@ -7,7 +7,7 @@ export default function Header({ setYoutubeVideos }: Props) {
         <h1 className='font-extrabold text-xl text-white text-center md:text-left'>
           Youtube downloader
         </h1>
-        <Search setYoutubeVideos={setYoutubeVideos} />
+        <SearchForm setYoutubeVideos={setYoutubeVideos} />
       </div>
     </header>
   );

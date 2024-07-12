@@ -1,0 +1,14 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+COPY ./backend .
+
+RUN mkdir .bin
+RUN wget https://github.com/yt-dlp/yt-dlp/releases/download/2024.07.09/yt-dlp -P .bin
+RUN yarn install
+RUN yarn run build
+
+ENTRYPOINT [ "node" ]
+
+CMD [ "." ]

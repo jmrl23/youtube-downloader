@@ -1,7 +1,7 @@
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import Header from '@/components/Header';
-import Main from '@/components/Main';
+import Header from './Header';
+import Content from './Content';
 
 const queryClient = new QueryClient();
 
@@ -11,7 +11,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Header setYoutubeVideos={setYoutubeVideos} />
-      <Main youtubeVideos={youtubeVideos} />
+      <Content youtubeVideos={youtubeVideos} />
     </QueryClientProvider>
   );
 }

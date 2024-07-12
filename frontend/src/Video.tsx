@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Img } from 'react-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MusicIcon, PauseIcon, PlayIcon, VideoIcon } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { saveFile } from '@/lib/utils';
-import YoutubeIframe from '@/components/YoutubeIframe';
+import Iframe from './Iframe';
 import sanitize from 'sanitize-filename';
 
-export default function YoutubeVideo({ youtubeVideo }: Props) {
+export default function Video({ youtubeVideo }: Props) {
   const { thumbnail, title, duration, author } = youtubeVideo;
   const [isPreview, setIsPreview] = useState<boolean>(false);
   const { toast } = useToast();
@@ -55,7 +54,7 @@ export default function YoutubeVideo({ youtubeVideo }: Props) {
     <div className='p-4 bg-white rounded shadow'>
       <header className='relative'>
         {isPreview ? (
-          <YoutubeIframe
+          <Iframe
             className='rounded aspect-video'
             width={'100%'}
             youtubeVideo={youtubeVideo}
@@ -68,7 +67,7 @@ export default function YoutubeVideo({ youtubeVideo }: Props) {
             >
               {duration.timestamp}
             </Badge>
-            <Img src={thumbnail} className='rounded aspect-video' />
+            <img src={thumbnail} className='rounded aspect-video' />
           </>
         )}
         <p className='text-slate-800 font-extrabold text-xs mt-4 border-l-4 border-slate-800 pl-4'>
