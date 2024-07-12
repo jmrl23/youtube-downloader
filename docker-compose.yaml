@@ -2,6 +2,8 @@ services:
   backend:
     build:
       dockerfile: dockerfile.backend
+    environment:
+      TMPDIR: /app/.tmp/
   frontend:
     build:
       dockerfile: dockerfile.frontend
