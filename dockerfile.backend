@@ -12,6 +12,8 @@ RUN chmod u+rwx .bin/yt-dlp
 RUN yarn install
 RUN yarn run build
 
+ENV NODE_ENV=production
+
 ENTRYPOINT [ "node" ]
 
 CMD [ "." ]
